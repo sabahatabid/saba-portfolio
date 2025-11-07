@@ -9,12 +9,10 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Encode the email data into a Gmail mailto link
     const subject = encodeURIComponent(`New message from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
     const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=sabahatabid157@gmail.com&su=${subject}&body=${body}`;
 
-    // Open Gmail compose window
     window.open(gmailLink, "_blank");
   };
 
@@ -30,7 +28,7 @@ const Contact = () => {
           placeholder="Your Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="p-3 rounded bg-gray-900 border border-gray-600"
+          className="p-3 rounded bg-gray-900 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
         <input
@@ -38,19 +36,20 @@ const Contact = () => {
           placeholder="Your Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="p-3 rounded bg-gray-900 border border-gray-600"
+          className="p-3 rounded bg-gray-900 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
         <textarea
           placeholder="Your Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="p-3 rounded bg-gray-900 border border-gray-600"
+          className="p-3 rounded bg-gray-900 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
+          rows={5}
         ></textarea>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded text-white"
+          className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded text-white font-semibold transition-colors duration-300"
         >
           Send Message
         </button>
@@ -60,4 +59,5 @@ const Contact = () => {
 };
 
 export default Contact;
+
 
