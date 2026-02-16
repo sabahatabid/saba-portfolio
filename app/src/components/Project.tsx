@@ -42,6 +42,22 @@ const projects = [
     description: "Static Interactive Resume built with HTML, CSS, and JavaScript for an engaging personal portfolio experience",
     link: "https://github.com/sabahatabid/1st-resume.git",
   },
+   {
+    title: "AI book using Speckit and claude code ",
+    description: "AI-powered interactive book on Physical AI and Humanoid Robotics, built with Docusaurus and featuring an integrated RAG chatbot.",
+    link: "https://github.com/sabahatabid/AI-book.git",
+  },
+  {
+    title: "Todo App with speckit and claude code ",
+    description: "AI Powered Todo App.",
+    link: "https://github.com/sabahatabid/todo-app-phase-2.git",
+  },
+   {
+    title: "Local Kubernetes Deployment - Todo Chatbot",
+    description: "A cloud-native Todo Chatbot application",
+    link: "https://github.com/sabahatabid/Todo-app-phase-4.git",
+  },
+  
 ];
 
 const Projects = () => {
