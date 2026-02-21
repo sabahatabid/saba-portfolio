@@ -11,7 +11,7 @@ const About = () => {
       {/* Left Side - Image */}
       <div className="w-full md:w-1/2 flex justify-center">
         <Image
-          src="/saba.jpg.jpeg" // 👉 Replace with your image in /public
+          src="/saba pic.jpg" // 👉 Replace with your image in /public
           alt="Profile Picture"
           width={400}
           height={400}
