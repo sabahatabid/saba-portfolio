@@ -57,6 +57,21 @@ const projects = [
     description: "A cloud-native Todo Chatbot application",
     link: "https://github.com/sabahatabid/Todo-app-phase-4.git",
   },
+  {
+    title: "Brand Outfits Web Application",
+    description: "A modern and responsive fashion brand showcase website",
+    link: "https://github.com/sabahatabid/Brand-hub.git",
+  },
+  {
+  title: "OOP in Python",
+  description: "A Python project demonstrating Object-Oriented Programming concepts",
+  link: "https://github.com/sabahatabid/OOP-in-python.git",
+},
+ {
+  title: "Voice Chatbot",
+  description: "A real-time voice-enabled chatbot application",
+  link: "https://github.com/sabahatabid/Voice-chatbot.git",
+} 
   
 ];
 
