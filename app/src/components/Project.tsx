@@ -11,7 +11,7 @@ const projects = [
     link: "https://github.com/sabahatabid/AI-Business-Assistant.git",
   },
   {
-    title: "rasato – Modern Restaurant & Fine Dining Experience",
+    title: "Brasato – Modern Restaurant & Fine Dining Experience",
     description: "A modern restaurant landing page showcasing elegant dining experience, menu, and reservations.",
     tags: ["Restaurant Landing Page"],
     link: "https://github.com/sabahatabid/brasato-restaurant-site.git",
