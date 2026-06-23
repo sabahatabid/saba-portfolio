@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Typewriter from "typewriter-effect";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaDownload, FaArrowDown, FaCode, FaServer } from "react-icons/fa";
 
@@ -47,34 +46,21 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-4"
+            className="text-6xl font-bold leading-tight mb-4"
           >
-            <span className="text-white">Hi, I am</span>
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">
               Syeda Sabahat Abid
             </span>
           </motion.h1>
 
-          {/* Typewriter */}
+          {/* Subheading */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-300 mb-6 h-9"
+            className="text-xl text-gray-400 mb-6 h-9"
           >
-            <Typewriter
-              options={{
-                strings: [
-                  "Full Stack Developer",
-                  "Next.js Developer",
-                  "React Developer",
-                  "AI Enthusiast",
-                ],
-                autoStart: true,
-                loop: true,
-              }}
-            />
+            Frontend Developer
           </motion.div>
 
           {/* Description */}
@@ -84,8 +70,7 @@ const Hero = () => {
             transition={{ delay: 0.5 }}
             className="text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-lg"
           >
-            Building end-to-end web applications with modern technologies.
-            From pixel-perfect frontends to scalable backends and AI-powered solutions.
+            Creating modern, responsive web applications with React and Next.js. Specializing in clean UI, fast dashboards, and AI-powered tools.
           </motion.p>
 
           {/* Tech pills */}

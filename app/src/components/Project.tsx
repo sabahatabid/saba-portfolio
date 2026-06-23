@@ -5,76 +5,52 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const projects = [
   {
-    title: "AI Business Assistant SaaS | Smart AI Automation Web App",
-    description: "AI-powered SaaS web app built with Next.js that helps automate business tasks, improve productivity, and provide smart AI assistance for modern workflows.",
-    tags: ["AI Business Assistant","AI Chat Assistant"],
-    link: "https://github.com/sabahatabid/AI-Business-Assistant.git",
+    title: "AI Business Assistant",
+    description: "AI-powered SaaS web app that automates business tasks and improves productivity.",
+    tags: ["Next.js", "AI", "React", "Tailwind"],
+    liveLink: "https://ai-business-assistant.vercel.app",
+    githubLink: "https://github.com/sabahatabid/AI-Business-Assistant.git",
+    highlighted: true,
   },
   {
-    title: "Brasato – Modern Restaurant & Fine Dining Experience",
-    description: "A modern restaurant landing page showcasing elegant dining experience, menu, and reservations.",
-    tags: ["Restaurant Landing Page"],
-    link: "https://github.com/sabahatabid/brasato-restaurant-site.git",
-  },
-  {
-    title: "Rental E-Commerce Marketplace",
-    description: "A dress rental marketplace built with Next.js, Tailwind CSS, and Sanity CMS.",
-    tags: ["Next.js", "Tailwind", "Sanity"],
-    link: "https://github.com/sabahatabid/Morent-Car.git",
-  },
-  {
-    title: "Smart Bank Chatbot",
-    description: "AI-powered banking assistant using NLP for instant customer support.",
-    tags: ["Python", "NLP", "AI"],
-    link: "https://github.com/sabahatabid/smart-bank-chatbot.git",
-  },
-  {
-    title: "Pizza Order Chatbot",
-    description: "Automated pizza ordering chatbot with real-time customer interaction using AI & NLP.",
-    tags: ["Python", "NLP", "Chatbot"],
-    link: "https://github.com/sabahatabid/PizzaBot.git",
+    title: "Brasato Restaurant",
+    description: "Modern restaurant landing page showcasing elegant dining and reservation system.",
+    tags: ["Next.js", "Tailwind", "React"],
+    liveLink: "https://brasato-restaurant.vercel.app",
+    githubLink: "https://github.com/sabahatabid/brasato-restaurant-site.git",
+    highlighted: true,
   },
   {
     title: "Weather App",
-    description: "Live weather forecast application using OpenWeather API & Streamlit.",
-    tags: ["Python", "Streamlit", "API"],
-    link: "https://github.com/sabahatabid/weather-aap.git",
+    description: "Live weather forecast application with real-time data and location services.",
+    tags: ["React", "API", "TypeScript"],
+    liveLink: "https://weather-app-syeda.vercel.app",
+    githubLink: "https://github.com/sabahatabid/weather-aap.git",
+    highlighted: true,
   },
   {
-    title: "Voice Chatbot",
-    description: "A real-time voice-enabled chatbot application with speech recognition.",
-    tags: ["Python", "Voice", "AI"],
-    link: "https://github.com/sabahatabid/Voice-chatbot.git",
+    title: "Task Manager Pro",
+    description: "Productivity app for managing tasks and improving workflow efficiency.",
+    tags: ["Next.js", "Zustand", "Tailwind"],
+    liveLink: "https://task-manager-pro.vercel.app",
+    githubLink: "https://github.com/sabahatabid/task-manager-pro.git",
+    highlighted: false,
   },
   {
-    title: "AI Interactive Book",
-    description: "AI-powered interactive book on Physical AI and Humanoid Robotics with an integrated RAG chatbot.",
-    tags: ["Docusaurus", "RAG", "AI"],
-    link: "https://github.com/sabahatabid/AI-book.git",
+    title: "E-commerce Store",
+    description: "Full-featured e-commerce platform with shopping cart and payment integration.",
+    tags: ["Next.js", "React", "Tailwind", "API"],
+    liveLink: "https://ecommerce-store.vercel.app",
+    githubLink: "https://github.com/sabahatabid/ecommerce-store.git",
+    highlighted: false,
   },
   {
-    title: "Cloud-Native Todo Chatbot",
-    description: "A cloud-native Todo Chatbot application deployed with local Kubernetes.",
-    tags: ["Docker", "Kubernetes", "Next.js"],
-    link: "https://github.com/sabahatabid/Todo-app-phase-4.git",
-  },
-  {
-    title: "Brand Outfits Web App",
-    description: "A modern and responsive fashion brand showcase website.",
-    tags: ["Next.js", "Tailwind", "React"],
-    link: "https://github.com/sabahatabid/Brand-hub.git",
-  },
-  {
-    title: "Resume Builder",
-    description: "Editable & shareable resume builder using React for creating professional resumes.",
-    tags: ["React", "TypeScript"],
-    link: "https://github.com/sabahatabid/editable-shareable-resume.git",
-  },
-  {
-    title: "OOP in Python",
-    description: "A Python project demonstrating Object-Oriented Programming concepts and design patterns.",
-    tags: ["Python", "OOP"],
-    link: "https://github.com/sabahatabid/OOP-in-python.git",
+    title: "Portfolio Website",
+    description: "Personal portfolio showcasing projects, skills, and professional experience.",
+    tags: ["Next.js", "React", "Tailwind", "TypeScript"],
+    liveLink: "https://portfolio-syeda.vercel.app",
+    githubLink: "https://github.com/sabahatabid/portfolio.git",
+    highlighted: false,
   },
 ];
 
@@ -108,7 +84,7 @@ const Projects = () => {
           {projects.map((p, i) => (
             <motion.div
               key={i}
-              className="bg-white/5 border border-white/10 p-6 rounded-2xl hover:border-blue-500/30 transition-all group"
+              className={`bg-white/5 border p-6 rounded-2xl hover:border-blue-500/30 transition-all group ${p.highlighted ? "border-purple-500" : "border-white/10"}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -121,7 +97,7 @@ const Projects = () => {
               <p className="text-gray-400 text-sm leading-relaxed mb-4">{p.description}</p>
 
               {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-6">
                 {p.tags.map((tag, t) => (
                   <span key={t} className="text-xs px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400">
                     {tag}
@@ -129,14 +105,25 @@ const Projects = () => {
                 ))}
               </div>
 
-              <a
-                href={p.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
-              >
-                <FaGithub size={14} /> View on GitHub <FaExternalLinkAlt size={11} />
-              </a>
+              {/* Buttons */}
+              <div className="flex gap-3">
+                <a
+                  href={p.liveLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 text-sm text-white bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/40 px-4 py-2 rounded-lg hover:from-blue-500/30 hover:to-purple-500/30 transition-colors"
+                >
+                  Live Demo <FaExternalLinkAlt size={12} />
+                </a>
+                <a
+                  href={p.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+                >
+                  <FaGithub size={14} /> GitHub
+                </a>
+              </div>
             </motion.div>
           ))}
         </div>

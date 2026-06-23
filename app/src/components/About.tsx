@@ -5,10 +5,9 @@ import { motion } from "framer-motion";
 import { FaCode, FaServer, FaDatabase, FaRocket } from "react-icons/fa";
 
 const stats = [
-  { value: "14+", label: "Projects Completed" },
-  { value: "2+", label: "Years Experience" },
-  { value: "10+", label: "Technologies" },
-  { value: "100%", label: "Dedication" },
+  { value: "14+", label: "Projects" },
+  { value: "3+", label: "Years Experience" },
+  { value: "25+", label: "Clients" },
 ];
 
 const stack = [
@@ -40,7 +39,7 @@ const About = () => {
             alt="Syeda Sabahat Abid"
             width={420}
             height={420}
-            className="relative rounded-2xl object-cover shadow-2xl grayscale hover:grayscale-0 transition duration-500 border border-white/10"
+            className="relative rounded-2xl object-cover shadow-2xl brightness-110 contrast-125 transition duration-500 border border-purple-500/30"
           />
           {/* Floating badge */}
           <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-xl shadow-lg">
@@ -70,17 +69,7 @@ const About = () => {
         </h2>
 
         <p className="text-gray-300 leading-relaxed">
-          I'm a passionate{" "}
-          <span className="text-blue-400 font-semibold">Full Stack Developer</span> who builds
-          end-to-end web applications — from pixel-perfect frontends to robust backends and
-          cloud deployments. I work across the entire stack using modern technologies like{" "}
-          <span className="text-blue-400 font-semibold">Next.js, Node.js, Python, and Docker</span>.
-        </p>
-
-        <p className="text-gray-400 leading-relaxed">
-          I've built AI-powered chatbots, e-commerce platforms, cloud-native apps with Kubernetes,
-          and interactive data tools with Streamlit. I love turning complex problems into clean,
-          scalable solutions that deliver real value.
+          I'm a Frontend Developer with 3+ years of experience building modern, responsive web applications using React, Next.js, and Tailwind CSS. I specialize in creating clean UI, fast dashboards, and AI-powered tools for startups and businesses. Based in Karachi, Pakistan, I focus on writing clean code and delivering pixel-perfect designs.
         </p>
 
         {/* Stack grid */}
