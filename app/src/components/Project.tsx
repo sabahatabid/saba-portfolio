@@ -9,13 +9,13 @@ const projects = [
     description: "AI-powered SaaS web app built with Next.js that helps automate business tasks, improve productivity, and provide smart AI assistance for modern workflows.",
     tags: ["AI Business Assistant","AI Chat Assistant"],
     link: "https://github.com/sabahatabid/AI-Business-Assistant.git",
-  }  
+  },
   {
     title: "rasato – Modern Restaurant & Fine Dining Experience",
     description: "A modern restaurant landing page showcasing elegant dining experience, menu, and reservations.",
     tags: ["Restaurant Landing Page"],
     link: "https://github.com/sabahatabid/brasato-restaurant-site.git",
-  }
+  },
   {
     title: "Rental E-Commerce Marketplace",
     description: "A dress rental marketplace built with Next.js, Tailwind CSS, and Sanity CMS.",
