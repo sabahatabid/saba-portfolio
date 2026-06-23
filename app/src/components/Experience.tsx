@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { FaBriefcase, FaChalkboardTeacher } from "react-icons/fa";
+import { FaBriefcase } from "react-icons/fa";
 
 const experiences = [
   {
@@ -26,21 +26,6 @@ const experiences = [
       "Strengthened technical skills in NLP and chatbot architecture",
       "Awarded Certificate of Top Performance",
     ],
-  },
-];
-
-const teaching = [
-  {
-    role: "Teacher",
-    company: "Springfield Academy",
-    period: "1 Year",
-    description: "Taught technical concepts to students.",
-  },
-  {
-    role: "Teacher",
-    company: "Aarfi Coaching",
-    period: "6 Months",
-    description: "Coaching and teaching technical subjects.",
   },
 ];
 
@@ -99,35 +84,6 @@ const Experience = () => {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Teaching Experience */}
-        <div>
-          <div className="flex items-center gap-3 mb-8">
-            <FaChalkboardTeacher className="text-purple-400 text-xl" />
-            <h3 className="text-xl font-semibold text-white">Teaching</h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {teaching.map((t, index) => (
-              <motion.div
-                key={index}
-                className="bg-white/5 border border-white/10 p-6 rounded-2xl border-l-4 border-l-purple-500 hover:bg-white/8 transition-all"
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <h4 className="text-lg font-bold text-purple-400">{t.role}</h4>
-                    <p className="text-gray-300 text-sm">{t.company}</p>
-                  </div>
-                  <span className="text-gray-500 text-xs bg-white/5 px-3 py-1 rounded-full">{t.period}</span>
-                </div>
-                <p className="text-gray-400 text-sm">{t.description}</p>
               </motion.div>
             ))}
           </div>

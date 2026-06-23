@@ -45,11 +45,11 @@ const projects = [
     highlighted: false,
   },
   {
-    title: "Portfolio Website",
-    description: "Personal portfolio showcasing projects, skills, and professional experience.",
-    tags: ["Next.js", "React", "Tailwind", "TypeScript"],
-    liveLink: "https://portfolio-syeda.vercel.app",
-    githubLink: "https://github.com/sabahatabid/portfolio.git",
+    title: "Brand Outfits Web App",
+    description: "Responsive fashion brand showcase with product galleries and modern layouts.",
+    tags: ["Next.js", "Tailwind", "React"],
+    liveLink: "https://brand-hub.vercel.app",
+    githubLink: "https://github.com/sabahatabid/Brand-hub.git",
     highlighted: false,
   },
 ];
