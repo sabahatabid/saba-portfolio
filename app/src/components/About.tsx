@@ -6,8 +6,7 @@ import { FaCode, FaServer, FaDatabase, FaRocket } from "react-icons/fa";
 
 const stats = [
   { value: "14+", label: "Projects" },
-  { value: "3+", label: "Years Experience" },
-  { value: "25+", label: "Clients" },
+  { value: "1+", label: "Years Experience" },
 ];
 
 const stack = [
