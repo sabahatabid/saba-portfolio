@@ -23,10 +23,7 @@ const Footer = () => (
           className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all">
           <FaGithub size={16} />
         </a>
-        <a href="https://vercel.com/sabahat-abids-projects" target="_blank" rel="noopener noreferrer"
-          className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all">
-          <FaGlobe size={16} />
-        </a>
+        {/* Vercel / live demo links removed by request */}
       </div>
 
       <p className="text-gray-600 text-xs">

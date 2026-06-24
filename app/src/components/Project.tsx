@@ -1,135 +1,196 @@
-"use client";
-import React from "react";
+﻿"use client";
+import React, { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaEye, FaTimes, FaGithub } from "react-icons/fa";
 
-const projects = [
+type Project = {
+  id: string;
+  title: string;
+  description: string;
+  screenshot: string;
+  tech: string[];
+  github?: string;
+};
+
+const projects: Project[] = [
   {
+    id: "ai-assistant",
     title: "AI Business Assistant",
-    description: "AI-powered SaaS web app that automates business tasks and improves productivity.",
-    tags: ["Next.js", "AI", "React", "Tailwind"],
-    liveLink: "https://ai-business-assistant.vercel.app",
-    githubLink: "https://github.com/sabahatabid/AI-Business-Assistant.git",
-    highlighted: true,
+    description:
+      "Modern AI SaaS dashboard with analytics, assistant chat, and automation panels.",
+    screenshot: "/projects/ai-business-assistant.webp",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "OpenAI", "Node.js"],
+    github: "https://github.com/sabahatabid/AI-Business-Assistant",
   },
   {
+    id: "brasato",
     title: "Brasato Restaurant",
-    description: "Modern restaurant landing page showcasing elegant dining and reservation system.",
-    tags: ["Next.js", "Tailwind", "React"],
-    liveLink: "https://brasato-restaurant.vercel.app",
-    githubLink: "https://github.com/sabahatabid/brasato-restaurant-site.git",
-    highlighted: true,
+    description:
+      "Premium restaurant website with elegant menu, reservation UI, and polished interactions.",
+    screenshot: "/projects/restaurant-web.webp",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Sanity"],
   },
   {
-    title: "Weather App",
-    description: "Live weather forecast application with real-time data and location services.",
-    tags: ["React", "API", "TypeScript"],
-    liveLink: "https://weather-app-syeda.vercel.app",
-    githubLink: "https://github.com/sabahatabid/weather-aap.git",
-    highlighted: true,
+    id: "weather-app",
+    title: "Weather Application",
+    description: "Responsive weather dashboard with forecast cards, charts, and location search.",
+    screenshot: "/projects/weather-app.jpg",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
+    github: "https://github.com/sabahatabid/weather-app",
   },
   {
-    title: "Task Manager Pro",
-    description: "Productivity app for managing tasks and improving workflow efficiency.",
-    tags: ["Next.js", "Zustand", "Tailwind"],
-    liveLink: "https://task-manager-pro.vercel.app",
-    githubLink: "https://github.com/sabahatabid/task-manager-pro.git",
-    highlighted: false,
-  },
-  {
-    title: "E-commerce Store",
-    description: "Full-featured e-commerce platform with shopping cart and payment integration.",
-    tags: ["Next.js", "React", "Tailwind", "API"],
-    liveLink: "https://ecommerce-store.vercel.app",
-    githubLink: "https://github.com/sabahatabid/ecommerce-store.git",
-    highlighted: false,
-  },
-  {
-    title: "Brand Outfits Web App",
-    description: "Responsive fashion brand showcase with product galleries and modern layouts.",
-    tags: ["Next.js", "Tailwind", "React"],
-    liveLink: "https://brand-hub.vercel.app",
-    githubLink: "https://github.com/sabahatabid/Brand-hub.git",
-    highlighted: false,
+    id: "brand-hub",
+    title: "Brand Hub",
+    description: "E-commerce brand showcase with polished product discovery and responsive design.",
+    screenshot: "/projects/brand-hub.jpg",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    github: "https://github.com/sabahatabid/Brand-hub.git",
   },
 ];
 
-const Projects = () => {
+export default function Projects() {
+  const [preview, setPreview] = useState<Project | null>(null);
+
+  function ProjectImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
+    const [imgSrc, setImgSrc] = useState(src);
+
+    return (
+      <Image
+        src={imgSrc}
+        alt={alt}
+        width={1200}
+        height={700}
+        className={className}
+        onError={() => setImgSrc("/projects/fallback.svg")}
+      />
+    );
+  }
+
   return (
-    <section id="projects" className="py-24 bg-[#0f0f1a]">
+    <section id="projects" className="py-20 bg-[#0f0f1a]">
       <div className="max-w-6xl mx-auto px-6">
-
-        {/* Heading */}
-        <motion.div
-          className="text-center mb-14"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full border border-blue-500/40 bg-blue-500/10 text-blue-400 text-sm font-medium mb-4">
-            Projects
-          </span>
-          <h2 className="text-4xl font-extrabold text-white">
-            My{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-              Work
+        <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <span className="inline-block px-4 py-1 rounded-full border border-blue-500/30 bg-blue-500/8 text-blue-300 text-sm font-medium mb-3">
+              Projects
             </span>
-          </h2>
-          <p className="text-gray-400 mt-3 max-w-xl mx-auto">
-            A selection of projects I've built across frontend, backend, and AI
-          </p>
-        </motion.div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white">Projects</h2>
+            <p className="text-slate-400 mt-3 max-w-2xl">
+              Premium, production-ready SaaS and product showcases crafted for clients.
+            </p>
+          </div>
+          <button className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-slate-900/60 px-4 py-2 text-sm font-semibold text-white shadow transition hover:scale-105">
+            View All Projects
+          </button>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((p, i) => (
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
+          {projects.map((project, index) => (
             <motion.div
-              key={i}
-              className={`bg-white/5 border p-6 rounded-2xl hover:border-blue-500/30 transition-all group ${p.highlighted ? "border-purple-500" : "border-white/10"}`}
-              initial={{ opacity: 0, y: 30 }}
+              key={project.id}
+              className="group relative rounded-2xl border border-white/6 bg-gradient-to-b from-slate-900/60 to-slate-900/40 backdrop-blur-md shadow-[0_18px_60px_-28px_rgba(0,0,0,0.9)] overflow-hidden"
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: (i % 4) * 0.1 }}
-              whileHover={{ y: -4 }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
             >
-              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-blue-400 transition-colors">
-                {p.title}
-              </h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-4">{p.description}</p>
+              <div className="relative">
+                <div className="w-full h-56 relative overflow-hidden rounded-t-2xl">
+                  <Image
+                    src={project.screenshot}
+                    alt={project.title}
+                    width={800}
+                    height={500}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    onError={(event) => {
+                      const target = event.target as HTMLImageElement | null;
+                      if (target) target.src = "/projects/fallback.svg";
+                    }}
+                  />
+                </div>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {p.tags.map((tag, t) => (
-                  <span key={t} className="text-xs px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400">
-                    {tag}
-                  </span>
-                ))}
+                <div className="absolute right-3 top-3 flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600/70 to-blue-500/60 px-3 py-1 text-xs text-white shadow">
+                  <span className="w-2 h-2 rounded-full bg-white block" />
+                  Preview Available
+                </div>
+
+                <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-purple-500/30 to-blue-400/30 blur-2xl opacity-60" />
+                </div>
               </div>
 
-              {/* Buttons */}
-              <div className="flex gap-3">
-                <a
-                  href={p.liveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 text-sm text-white bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/40 px-4 py-2 rounded-lg hover:from-blue-500/30 hover:to-purple-500/30 transition-colors"
-                >
-                  Live Demo <FaExternalLinkAlt size={12} />
-                </a>
-                <a
-                  href={p.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  <FaGithub size={14} /> GitHub
-                </a>
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-white mb-2">{project.title}</h3>
+                <p className="text-sm text-slate-300 mb-4 leading-6">{project.description}</p>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tech.map((item) => (
+                    <span key={item} className="text-xs px-2 py-1 rounded-full bg-slate-800/60 border border-white/6 text-slate-100">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
+                  <button
+                    onClick={() => setPreview(project)}
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-white/8 bg-gradient-to-r from-purple-600 to-blue-500 px-4 py-2 text-sm font-semibold text-white shadow hover:scale-105 transition"
+                  >
+                    <FaEye /> Preview
+                  </button>
+
+                  {project.github ? (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 rounded-full border border-white/8 bg-slate-900/50 px-4 py-2 text-sm font-semibold text-slate-200 shadow hover:scale-105 transition"
+                    >
+                      <FaGithub /> GitHub
+                    </a>
+                  ) : null}
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
+
+        <p className="mt-8 text-center text-sm text-slate-400">
+          Preview screenshots available for all projects. Source code and live demos can be shared upon request.
+        </p>
+
+        {preview && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
+            <div className="relative w-full max-w-4xl rounded-2xl border border-white/8 bg-slate-900 p-4 shadow-2xl">
+              <button
+                aria-label="Close preview"
+                onClick={() => setPreview(null)}
+                className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-800/70 text-white"
+              >
+                <FaTimes />
+              </button>
+
+              <h3 className="text-lg font-semibold text-white mb-3">{preview.title}</h3>
+              <div className="overflow-hidden rounded-xl border border-white/8 bg-slate-800">
+                <ProjectImage src={preview.screenshot} alt={preview.title} className="w-full h-auto object-cover" />
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {preview.tech.map((item) => (
+                  <span key={item} className="text-xs px-2 py-1 rounded-full bg-slate-800/60 border border-white/6 text-slate-100">
+                    {item}
+                  </span>
+                ))}
+              </div>
+
+              <p className="mt-4 text-sm text-slate-400">
+                Preview screenshot only — no external navigation. Source code available on request.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
-};
-
-export default Projects;
+}

@@ -29,7 +29,7 @@ const Resume = () => {
           </div>
           <div className="flex gap-3">
             <a
-              href="/resume.jpg"
+              href="/sabahat-cv.jpeg"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white/5 border border-white/10 text-gray-300 px-5 py-2.5 rounded-xl font-semibold hover:bg-white/10 transition-all text-sm"
@@ -37,7 +37,7 @@ const Resume = () => {
               <FaExpand size={12} /> Full View
             </a>
             <a
-              href="/resume.jpg"
+              href="/sabahat-cv.jpeg"
               download="Sabahat_Abid_Resume"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all text-sm"
             >
@@ -55,7 +55,7 @@ const Resume = () => {
           transition={{ duration: 0.5 }}
         >
           <Image
-            src="/resume.jpg"
+            src="/sabahat-cv.jpeg"
             alt="Syeda Sabahat Abid Resume"
             width={800}
             height={1100}

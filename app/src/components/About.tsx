@@ -33,14 +33,16 @@ const About = () => {
       >
         <div className="relative">
           {/* Glow behind image */}
-          <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl blur-2xl opacity-20" />
-          <Image
-            src="/saba pic.jpg"
-            alt="Syeda Sabahat Abid"
-            width={420}
-            height={420}
-            className="relative rounded-2xl object-cover shadow-2xl brightness-110 contrast-125 transition duration-500 border border-purple-500/30"
-          />
+          <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-2xl opacity-20" />
+          <div className="overflow-hidden rounded-full w-[280px] h-[280px] md:w-[420px] md:h-[420px] mx-auto">
+            <Image
+              src="/saba-pic.jpg"
+              alt="Syeda Sabahat Abid"
+              width={420}
+              height={420}
+              className="relative rounded-full object-cover shadow-2xl brightness-110 contrast-125 transition duration-500 border border-purple-500/30"
+            />
+          </div>
           {/* Floating badge */}
           <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-xl shadow-lg">
             Full Stack Developer 🚀
