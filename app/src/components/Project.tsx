@@ -1,195 +1,327 @@
 "use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { FaEye, FaTimes, FaGithub } from "react-icons/fa";
+import { motion, useReducedMotion } from "framer-motion";
+import { HiArrowUpRight } from "react-icons/hi2";
+import { HiSparkles } from "react-icons/hi2";
+import { TbStack2 } from "react-icons/tb";
 
-type Project = {
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type Category = "AI / SaaS" | "Frontend" | "Full Stack" | "E-Commerce";
+
+interface Project {
   id: string;
   title: string;
   description: string;
   screenshot: string;
   tech: string[];
-  github?: string;
-};
+  liveUrl: string;
+  category: Category;
+  featured?: boolean;
+}
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const projects: Project[] = [
   {
     id: "ai-assistant",
     title: "AI Business Assistant",
     description:
-      "Modern AI SaaS dashboard with analytics, assistant chat, and automation panels.",
+      "Modern AI SaaS dashboard with analytics, assistant chat, and intelligent automation panels built for scale.",
     screenshot: "/projects/ai-business-assistant.webp",
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "OpenAI", "Node.js"],
-    github: "https://github.com/sabahatabid/AI-Business-Assistant",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "OpenAI", "Node.js"],
+    liveUrl: "https://ai-business-assist.vercel.app/",
+    category: "AI / SaaS",
+    featured: true,
   },
   {
     id: "brasato",
     title: "Brasato Restaurant",
     description:
-      "Premium restaurant website with elegant menu, reservation UI, and polished interactions.",
+      "Premium restaurant experience with an elegant digital menu, reservation flow, and refined micro-interactions.",
     screenshot: "/projects/restaurant-web.webp",
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Sanity"],
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity"],
+    liveUrl: "https://brasato-restaurant-site.vercel.app/",
+    category: "Frontend",
+    featured: true,
   },
   {
     id: "weather-app",
     title: "Weather Application",
-    description: "Responsive weather dashboard with forecast cards, charts, and location search.",
+    description:
+      "Responsive weather dashboard featuring real-time forecast cards, data visualisations, and smart location search.",
     screenshot: "/projects/weather-app.jpg",
     tech: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
-    github: "https://github.com/sabahatabid/weather-app",
+    liveUrl: "https://live-weather-app-two.vercel.app/",
+    category: "Full Stack",
   },
   {
     id: "brand-hub",
     title: "Brand Hub",
-    description: "E-commerce brand showcase with polished product discovery and responsive design.",
+    description:
+      "E-commerce brand showcase with polished product discovery, smooth navigation, and fully responsive layout.",
     screenshot: "/projects/brand-hub.jpg",
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    github: "https://github.com/sabahatabid/Brand-hub.git",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://brasato-restaurant-site.vercel.app/",
+    category: "E-Commerce",
   },
 ];
 
-export default function Projects() {
-  const [preview, setPreview] = useState<Project | null>(null);
+// ─── Category colour map ───────────────────────────────────────────────────────
 
-  function ProjectImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
-    const [imgSrc, setImgSrc] = useState(src);
+const categoryStyles: Record<Category, string> = {
+  "AI / SaaS":   "bg-violet-500/15 text-violet-300 border-violet-500/25",
+  "Frontend":    "bg-blue-500/15   text-blue-300   border-blue-500/25",
+  "Full Stack":  "bg-cyan-500/15   text-cyan-300   border-cyan-500/25",
+  "E-Commerce":  "bg-rose-500/15   text-rose-300   border-rose-500/25",
+};
 
-    return (
-      <Image
-        src={imgSrc}
-        alt={alt}
-        width={1200}
-        height={700}
-        className={className}
-        onError={() => setImgSrc("/projects/fallback.svg")}
-      />
-    );
-  }
+// ─── Animation variants ────────────────────────────────────────────────────────
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const headingVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function FallbackImage({
+  src,
+  alt,
+}: {
+  src: string;
+  alt: string;
+}) {
+  const [imgSrc, setImgSrc] = useState(src);
+  return (
+    <Image
+      src={imgSrc}
+      alt={alt}
+      fill
+      sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+      onError={() => setImgSrc("/projects/fallback.svg")}
+      loading="lazy"
+    />
+  );
+}
+
+function CategoryBadge({ category }: { category: Category }) {
+  return (
+    <span
+      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold border tracking-wide ${categoryStyles[category]}`}
+    >
+      <TbStack2 className="text-[10px]" />      {category}
+    </span>
+  );
+}
+
+function FeaturedBadge() {
+  return (
+    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold border bg-amber-400/10 text-amber-300 border-amber-400/30 tracking-wide">
+      <HiSparkles className="text-[10px]" />
+      Featured
+    </span>
+  );
+}
+
+// ─── Project Card ─────────────────────────────────────────────────────────────
+
+function ProjectCard({ project }: { project: Project }) {
+  const prefersReduced = useReducedMotion();
 
   return (
-    <section id="projects" className="py-20 bg-[#0f0f1a]">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <span className="inline-block px-4 py-1 rounded-full border border-blue-500/30 bg-blue-500/8 text-blue-300 text-sm font-medium mb-3">
-              Projects
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white">Projects</h2>
-            <p className="text-slate-400 mt-3 max-w-2xl">
-              Premium, production-ready SaaS and product showcases crafted for clients.
-            </p>
-          </div>
-          <button className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-slate-900/60 px-4 py-2 text-sm font-semibold text-white shadow transition hover:scale-105">
-            View All Projects
-          </button>
+    <motion.a
+      variants={prefersReduced ? {} : cardVariants}
+      href={project.liveUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`View ${project.title} live demo`}
+      className={[
+        "group relative flex flex-col rounded-[20px] overflow-hidden cursor-pointer",
+        "bg-[#13131f] border border-white/[0.07]",
+        "transition-all duration-300 ease-out",
+        "hover:-translate-y-1.5 hover:scale-[1.015]",
+        "hover:border-white/[0.18]",
+        "hover:shadow-[0_8px_40px_-8px_rgba(139,92,246,0.35),0_2px_16px_-4px_rgba(0,0,0,0.7)]",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
+      ].join(" ")}
+    >
+      {/* ── Image ── */}
+      <div className="relative w-full aspect-[16/9] overflow-hidden">
+        <FallbackImage src={project.screenshot} alt={project.title} />
+
+        {/* Gradient scrim at bottom of image */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#13131f] via-transparent to-transparent opacity-60 pointer-events-none" />
+
+        {/* Live Demo pill — appears on hover */}
+        <div
+          className={[
+            "absolute bottom-3 right-3 flex items-center gap-1.5",
+            "px-3 py-1 rounded-full text-xs font-semibold text-white",
+            "bg-white/10 backdrop-blur-md border border-white/20",
+            "opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0",
+            "transition-all duration-300 ease-out",
+          ].join(" ")}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse block" />
+          Live Demo
+          <HiArrowUpRight className="text-[12px]" />
+        </div>
+      </div>
+
+      {/* ── Body ── */}
+      <div className="flex flex-col flex-1 p-5 gap-3">
+        {/* Badges row */}
+        <div className="flex flex-wrap items-center gap-2">
+          <CategoryBadge category={project.category} />
+          {project.featured && <FeaturedBadge />}
         </div>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              className="group relative rounded-2xl border border-white/6 bg-gradient-to-b from-slate-900/60 to-slate-900/40 backdrop-blur-md shadow-[0_18px_60px_-28px_rgba(0,0,0,0.9)] overflow-hidden"
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.06 }}
+        {/* Title */}
+        <h3 className="text-[1.05rem] font-bold text-white leading-snug group-hover:text-violet-200 transition-colors duration-200">
+          {project.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-sm text-slate-400 leading-relaxed flex-1">
+          {project.description}
+        </p>
+
+        {/* Tech stack */}
+        <div className="flex flex-wrap gap-1.5 pt-1">
+          {project.tech.map((tag) => (
+            <span
+              key={tag}
+              className="text-[11px] px-2 py-0.5 rounded-md bg-white/[0.05] border border-white/[0.08] text-slate-300 font-medium"
             >
-              <div className="relative">
-                <div className="w-full h-56 relative overflow-hidden rounded-t-2xl">
-                  <Image
-                    src={project.screenshot}
-                    alt={project.title}
-                    width={800}
-                    height={500}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    onError={(event) => {
-                      const target = event.target as HTMLImageElement | null;
-                      if (target) target.src = "/projects/fallback.svg";
-                    }}
-                  />
-                </div>
-
-                <div className="absolute right-3 top-3 flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600/70 to-blue-500/60 px-3 py-1 text-xs text-white shadow">
-                  <span className="w-2 h-2 rounded-full bg-white block" />
-                  Preview Available
-                </div>
-
-                <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-purple-500/30 to-blue-400/30 blur-2xl opacity-60" />
-                </div>
-              </div>
-
-              <div className="p-5">
-                <h3 className="text-lg font-semibold text-white mb-2">{project.title}</h3>
-                <p className="text-sm text-slate-300 mb-4 leading-6">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((item) => (
-                    <span key={item} className="text-xs px-2 py-1 rounded-full bg-slate-800/60 border border-white/6 text-slate-100">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
-                  <button
-                    onClick={() => setPreview(project)}
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-white/8 bg-gradient-to-r from-purple-600 to-blue-500 px-4 py-2 text-sm font-semibold text-white shadow hover:scale-105 transition"
-                  >
-                    <FaEye /> Preview
-                  </button>
-
-                  {project.github ? (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 rounded-full border border-white/8 bg-slate-900/50 px-4 py-2 text-sm font-semibold text-slate-200 shadow hover:scale-105 transition"
-                    >
-                      <FaGithub /> GitHub
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            </motion.div>
+              {tag}
+            </span>
           ))}
         </div>
 
-        <p className="mt-8 text-center text-sm text-slate-400">
-          Preview screenshots available for all projects. Source code and live demos can be shared upon request.
-        </p>
+        {/* Footer row */}
+        <div className="flex items-center justify-between pt-2 mt-auto border-t border-white/[0.06]">
+          <span className="text-xs text-slate-500 font-medium">
+            Click to explore →
+          </span>
+          <span
+            className={[
+              "flex items-center gap-1 text-xs font-semibold text-violet-400",
+              "opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0",
+              "transition-all duration-300 ease-out",
+            ].join(" ")}
+          >
+            Open site
+            <HiArrowUpRight className="text-[13px]" />
+          </span>
+        </div>
+      </div>
 
-        {preview && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-            <div className="relative w-full max-w-4xl rounded-2xl border border-white/8 bg-slate-900 p-4 shadow-2xl">
-              <button
-                aria-label="Close preview"
-                onClick={() => setPreview(null)}
-                className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-800/70 text-white"
-              >
-                <FaTimes />
-              </button>
+      {/* Subtle inner glow ring on hover */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.08) 0%, transparent 70%)",
+        }}
+      />
+    </motion.a>
+  );
+}
 
-              <h3 className="text-lg font-semibold text-white mb-3">{preview.title}</h3>
-              <div className="overflow-hidden rounded-xl border border-white/8 bg-slate-800">
-                <ProjectImage src={preview.screenshot} alt={preview.title} className="w-full h-auto object-cover" />
-              </div>
+// ─── Section ──────────────────────────────────────────────────────────────────
 
-              <div className="mt-4 flex flex-wrap gap-2">
-                {preview.tech.map((item) => (
-                  <span key={item} className="text-xs px-2 py-1 rounded-full bg-slate-800/60 border border-white/6 text-slate-100">
-                    {item}
-                  </span>
-                ))}
-              </div>
+export default function Projects() {
+  return (
+    <section
+      id="projects"
+      aria-labelledby="projects-heading"
+      className="relative py-24 bg-[#0f0f1a] overflow-hidden"
+    >
+      {/* Ambient background blobs */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 left-1/4 w-[480px] h-[480px] rounded-full bg-violet-600/8 blur-[120px]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 right-1/4 w-[360px] h-[360px] rounded-full bg-blue-600/8 blur-[100px]"
+      />
 
-              <p className="mt-4 text-sm text-slate-400">
-                Preview screenshot only — no external navigation. Source code available on request.
-              </p>
-            </div>
+      <div className="relative max-w-6xl mx-auto px-5 sm:px-8">
+
+        {/* ── Section heading ── */}
+        <motion.div
+          className="mb-16 max-w-2xl"
+          variants={headingVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+        >
+          <div className="flex items-center gap-2 mb-4">
+            <span className="block h-px w-8 bg-gradient-to-r from-violet-500 to-transparent" />
+            <span className="text-xs font-bold uppercase tracking-[0.18em] text-violet-400">
+              Selected Work
+            </span>
           </div>
-        )}
+
+          <h2
+            id="projects-heading"
+            className="text-4xl sm:text-5xl font-extrabold text-white leading-tight tracking-tight"
+          >
+            Projects I've{" "}
+            <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              Built & Shipped
+            </span>
+          </h2>
+
+          <p className="mt-4 text-base text-slate-400 leading-relaxed">
+            Production-grade applications — from AI dashboards to e-commerce — designed
+            for real users and deployed at scale.
+          </p>
+        </motion.div>
+
+        {/* ── Grid ── */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-5 lg:gap-7"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+        >
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </motion.div>
+
+        {/* ── Footer note ── */}
+        <motion.p
+          className="mt-12 text-center text-sm text-slate-500"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
+          Every project is live and deployed — click any card to explore.
+        </motion.p>
+
       </div>
     </section>
   );
