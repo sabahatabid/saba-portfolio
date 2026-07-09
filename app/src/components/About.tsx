@@ -6,7 +6,8 @@ import { FaCode, FaServer, FaDatabase, FaRocket } from "react-icons/fa";
 
 const stats = [
   { value: "14+", label: "Projects" },
-  { value: "1+", label: "Years Experience" },
+  { value: "3+", label: "Years Experience" },
+  { value: "25+", label: "Clients" },
 ];
 
 const stack = [
@@ -70,7 +71,7 @@ const About = () => {
         </h2>
 
         <p className="text-gray-300 leading-relaxed">
-          I'm a Frontend Developer with 3+ years of experience building modern, responsive web applications using React, Next.js, and Tailwind CSS. I specialize in creating clean UI, fast dashboards, and AI-powered tools for startups and businesses. Based in Karachi, Pakistan, I focus on writing clean code and delivering pixel-perfect designs.
+          I'm a Frontend Developer with 3+ years of experience building modern, responsive web applications using React, Next.js, and Tailwind CSS. I specialize in creating clean UI, fast dashboards and scalable solutions that drive business results.
         </p>
 
         {/* Stack grid */}
@@ -109,7 +110,7 @@ const About = () => {
         <div className="flex flex-wrap gap-3 pt-2 justify-center md:justify-start">
           <a
             href="#projects"
-            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2.5 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105 text-sm"
+            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2.5 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105"
           >
             View Projects
           </a>
