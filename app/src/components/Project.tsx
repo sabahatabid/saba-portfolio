@@ -148,7 +148,7 @@ function ProjectCard({ project }: { project: Project }) {
 
   return (
     <motion.a
-      variants={prefersReduced ? {} : cardVariants}
+      variants={prefersReduced ? undefined : cardVariants}
       href={project.liveUrl}
       target="_blank"
       rel="noopener noreferrer"
