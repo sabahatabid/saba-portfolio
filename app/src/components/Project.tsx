@@ -54,7 +54,7 @@ const projects: Project[] = [
       "Responsive weather dashboard featuring real-time forecast cards, data visualisations, and smart location search.",
     screenshot: "/projects/weather-app.jpg",
     tech: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
-    liveUrl: "https://live-weather-app-two.vercel.app",
+    liveUrl: "https://weather-app-lbgk.vercel.app",
     category: "Full Stack",
   },
   {
