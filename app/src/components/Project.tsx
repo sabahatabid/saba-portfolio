@@ -67,6 +67,24 @@ const projects: Project[] = [
     liveUrl: "https://brand-hub-rclt.vercel.app",
     category: "E-Commerce",
   },
+  {
+    id: "pizza-chatbot",
+    title: "Pizza Chatbot",
+    description: "AI-powered pizza ordering chatbot with natural language processing, menu browsing, and seamless order flow.",
+    screenshot: "/projects/pizza-chatbot.jpg",
+    tech: ["React", "TypeScript", "Tailwind CSS", "OpenAI"],
+    liveUrl: "https://pizza-chatbot-dun.vercel.app/",
+    category: "AI / SaaS",
+  },
+  {
+    id: "smart-bank-chatbot",
+    title: "Smart Bank Chatbot",
+    description: "Intelligent banking assistant with real-time support, account queries, and secure conversational UI.",
+    screenshot: "/projects/smart-bank-chatbot.jpg",
+    tech: ["React", "TypeScript", "Tailwind CSS", "OpenAI"],
+    liveUrl: "https://smart-bank-chatbot-o4y8.vercel.app/",
+    category: "AI / SaaS",
+  },
 ];
 
 // ─── Category colour map ───────────────────────────────────────────────────────
